@@ -1,4 +1,5 @@
 h1. hnsorter
+
 Bookmarklet to sort Hacker News stories by points.
 
 h3. Instructions
@@ -7,7 +8,9 @@ h3. Instructions
 # There is no step 3.
 
 h3. Bugs
+
 The bookmarklet has been tested in recent Firefox and should work in any browser that supports ECMA5. If you find bugs, pull requests are welcome.
 
 h3. License
+
 None (public domain)
