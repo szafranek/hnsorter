@@ -1,12 +1,13 @@
-h1. hnsorter – bookmarklet to sort Hacker News stories by points
+h1. hnsorter
+Bookmarklet to sort Hacker News stories by points.
 
-h2. Instructions
+h3. Instructions
 # Go to "demo page":http://szafranek.github.com/hnsorter/ and add bookmarklet to your browser bookmarks.
 # Go to "Hacker News":http://news.ycombinator.com/ and click the bookmarklet to sort the stories.
 # There is no step 3.
 
-h2. Bugs
+h3. Bugs
 The bookmarklet has been tested in recent Firefox and should work in any browser that supports ECMA5. If you find bugs, pull requests are welcome.
 
-h2. License
+h3. License
 None (public domain)
