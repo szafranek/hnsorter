@@ -1,6 +1,6 @@
 /*jshint*/
 (function() {
-    var i, rows=[];
+    var i, l, rows=[];
     var postTable=document.querySelector("center>table tr:nth-child(3) table");
     for(i=1;i<=3;i++) {
         rows.push(postTable.querySelectorAll("tr:nth-child(3n+" + i + ")"));
