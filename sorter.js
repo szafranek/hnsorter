@@ -1,27 +1,18 @@
-/*jshint*/
-(function() {
-    var i, l, rows=[];
-    var postTable=document.querySelector("center>table tr:nth-child(3) table");
-    for(i=1;i<=3;i++) {
-        rows.push(postTable.querySelectorAll("tr:nth-child(3n+" + i + ")"));
-    }
-    var slice=Array.prototype.slice;
-    
-    var titleRows=slice.call(rows[0]);
-    var metaRows=slice.call(rows[1]);
-    var oneButLastRow=titleRows.pop();
-    var lastRow=metaRows.pop();
-    
-    var separatorRows=slice.call(rows[2]);
-    
-    
-    var newRows=[];
-    for (i=0, l=titleRows.length; i < l; i++) {
-        var pointSpan=metaRows[i].querySelector("td.subtext>span");
-        var points=0;
-        if (pointSpan!==null) {
-            points = parseInt(pointSpan.innerHTML.split(" ")[0], 10);
-        }
+(function () {
+    const itemlist = document.querySelector("table.itemlist");
+    const clonedItemlist = itemlist.cloneNode(true);
+    const clonedTbody = clonedItemlist.querySelector("tbody");
+    const footerRows = [clonedTbody.removeChild(clonedTbody.lastElementChild), clonedTbody.removeChild(clonedTbody.lastElementChild)].reverse();
+
+    const getRowsOfType = (i) => Array.from(clonedTbody.querySelectorAll(`tr:nth-child(3n+${i})`));
+
+    const titleRows = getRowsOfType(1);
+    const metaRows = getRowsOfType(2);
+    const separatorRows = getRowsOfType(3);
+
+    const newRows = [];
+    for (let i = 0; i < titleRows.length; i++) {
+        const points = parseInt(metaRows[i].querySelector(".score")?.innerHTML.split(" ")[0], 10) ?? 0;
 
         newRows.push({
             title: titleRows[i],
@@ -30,25 +21,12 @@
             points: points
         });
     }
-    newRows.sort(function(rowA, rowB) {
-        return rowB.points - rowA.points;
-    });
-    
-    var newRowsFragment=document.createDocumentFragment();
-    
-    newRows.forEach(function(rowSet) {
-        newRowsFragment.appendChild(rowSet.title);
-        newRowsFragment.appendChild(rowSet.meta);
-        newRowsFragment.appendChild(rowSet.separator);
-    });
-    newRowsFragment.appendChild(oneButLastRow);
-    newRowsFragment.appendChild(lastRow);
-    
-    while(postTable.firstChild) {
-      postTable.removeChild(postTable.firstChild);
-    }
-    
-    
-    postTable.appendChild(newRowsFragment);
+    newRows.sort((rowA, rowB) => rowB.points - rowA.points);
+
+    const sortedItemlist = document.createElement("tbody");
+    newRows.forEach((rowSet) => sortedItemlist.append(rowSet.title, rowSet.meta, rowSet.separator));
+    sortedItemlist.append(...footerRows);
+
+    itemlist.replaceChild(sortedItemlist, itemlist.querySelector("tbody"));
 
 }());

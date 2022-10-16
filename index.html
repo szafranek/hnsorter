@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <title>Hacker News story sorter</title>
@@ -20,11 +20,7 @@ body {
 <body>
 <h1>Hacker News story sorter – a bookmarklet</h1>
 Bookmark this link:
-<a id="bookmarklet" href='javascript:(function(){var i,rows=[];var postTable=document.querySelector("center>table tr:nth-child(3) table");for(i=1;i<=3;i++){rows.push(postTable.querySelectorAll("tr:nth-child(3n+"+i+")"));}
-var slice=Array.prototype.slice;var titleRows=slice.call(rows[0]);var metaRows=slice.call(rows[1]);var oneButLastRow=titleRows.pop();var lastRow=metaRows.pop();var separatorRows=slice.call(rows[2]);var newRows=[];for(i=0,l=titleRows.length;i<l;i++){var pointSpan=metaRows[i].querySelector("td.subtext>span");var points=0;if(pointSpan!==null){points=parseInt(pointSpan.innerHTML.split(" ")[0],10);}
-newRows.push({title:titleRows[i],meta:metaRows[i],separator:separatorRows[i],points:points});}
-newRows.sort(function(rowA,rowB){return rowB.points-rowA.points;});var newRowsFragment=document.createDocumentFragment();newRows.forEach(function(rowSet){newRowsFragment.appendChild(rowSet.title);newRowsFragment.appendChild(rowSet.meta);newRowsFragment.appendChild(rowSet.separator);});newRowsFragment.appendChild(oneButLastRow);newRowsFragment.appendChild(lastRow);while(postTable.firstChild){postTable.removeChild(postTable.firstChild);}
-postTable.appendChild(newRowsFragment);}());'>HN sorter</a>
+<a id="bookmarklet" href="javascript:(function()%7Bconst%20itemlist%20%3D%20document.querySelector(%22table.itemlist%22)%3Bconst%20clonedItemlist%20%3D%20itemlist.cloneNode(true)%3Bconst%20clonedTbody%20%3D%20clonedItemlist.querySelector(%22tbody%22)%3Bconst%20footerRows%20%3D%20%5BclonedTbody.removeChild(clonedTbody.lastElementChild)%2C%20clonedTbody.removeChild(clonedTbody.lastElementChild)%5D.reverse()%3Bconst%20getRowsOfType%20%3D%20(i)%20%3D%3E%20Array.from(clonedTbody.querySelectorAll(%60tr%3Anth-child(3n%2B%24%7Bi%7D)%60))%3Bconst%20titleRows%20%3D%20getRowsOfType(1)%3Bconst%20metaRows%20%3D%20getRowsOfType(2)%3Bconst%20separatorRows%20%3D%20getRowsOfType(3)%3Bconst%20newRows%20%3D%20%5B%5D%3Bfor%20(let%20i%20%3D%200%3B%20i%20%3C%20titleRows.length%3B%20i%2B%2B)%20%7Bconst%20points%20%3D%20parseInt(metaRows%5Bi%5D.querySelector(%22.score%22)%3F.innerHTML.split(%22%20%22)%5B0%5D%2C%2010)%20%3F%3F%200%3BnewRows.push(%7Btitle%3A%20titleRows%5Bi%5D%2Cmeta%3A%20metaRows%5Bi%5D%2Cseparator%3A%20separatorRows%5Bi%5D%2Cpoints%3A%20points%7D)%3B%7DnewRows.sort((rowA%2C%20rowB)%20%3D%3E%20rowB.points%20-%20rowA.points)%3Bconst%20sortedItemlist%20%3D%20document.createElement(%22tbody%22)%3BnewRows.forEach((rowSet)%20%3D%3E%20sortedItemlist.append(rowSet.title%2C%20rowSet.meta%2C%20rowSet.separator))%3BsortedItemlist.append(...footerRows)%3Bitemlist.replaceChild(sortedItemlist%2C%20itemlist.querySelector(%22tbody%22))%7D)()"">HN sorter</a>
 
 
 </body>
