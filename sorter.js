@@ -1,5 +1,5 @@
 (function () {
-    const itemlist = document.querySelector("table.itemlist");
+    const itemlist = document.querySelector("body > center > table > tbody > tr:nth-child(3) > td > table");
     const clonedItemlist = itemlist.cloneNode(true);
     const clonedTbody = clonedItemlist.querySelector("tbody");
     const footerRows = [clonedTbody.removeChild(clonedTbody.lastElementChild), clonedTbody.removeChild(clonedTbody.lastElementChild)].reverse();
